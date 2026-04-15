@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Guardião – Diagnóstico Financeiro Automático</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ================= DESIGN SYSTEM (KEYFOR CLONE PERFECT MATCH) ================= */
+:root {
+  --primary: #94FFA4;      /* Verde Limão Brilhante Keyfor */
+  --primary-hover: #72E683;
+  --bg-very-dark: #070D09;  /* Fundo Escuro Profundo (Quase Preto) */
+  --bg-dark: #122117;      /* Verde Escuro Corporativo (Keyfor Hero) */
+  --bg-light-green: #C5F7D0; /* Fundo Secão Clara */
+  --bg-white: #FFFFFF;
+  
+  --text-light: #F1F5F9;
+  --text-dark: #070D09;
+  --text-muted: #9CA3AF;
+  
+  --border-radius-pill: 50px;    /* Botões Pill Keyfor */
+  --border-radius-card: 16px;    /* Cards Arredondados Keyfor */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-base);
+  background-color: var(--bg-very-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--text-light);
+  line-height: 1.2;
+}
+
+a { text-decoration: none; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* ================= BUTTONS ================= */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; text-align:center;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem;
+  transition: all 0.3s ease; cursor: pointer; border: none;
+  padding: 1.2rem 2.5rem;
+  border-radius: var(--border-radius-pill);
+}
+.btn-primary {
+  background: var(--primary); 
+  color: var(--text-dark);
+  text-transform: none;
+  gap: 0.8rem;
+  box-shadow: 0 4px 15px rgba(148, 255, 164, 0.2);
+}
+.btn-primary:hover {
+  background: var(--primary-hover); transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(148, 255, 164, 0.3);
+}
+
+.btn-icon {
+  background: var(--bg-white);
+  color: var(--primary);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.btn-ghost-pill {
+  background: rgba(255,255,255,0.05); color: var(--text-light);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--border-radius-pill);
+  padding: 0.6rem 1.5rem; font-size: 0.9rem; font-weight: 500;
+}
+.btn-ghost-pill:hover { background: rgba(255,255,255,0.1); }
+
+/* ================= HEADER ================= */
+header {
+  padding: 1.5rem 0;
+  position: absolute; top:0; left:0; width: 100%; z-index: 50;
+}
+.header-flex { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--text-light); text-transform: lowercase; letter-spacing: -1px;}
+.logo span { color: var(--primary); }
+
+/* ================= 1. HERO SECTION (MODERN ANIMATED - RAINING LETTERS) ================= */
+.hero { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  min-height: 700px;
+  background: var(--bg-very-dark); 
+  color: var(--text-light); 
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.raining-letters-bg {
+  position: absolute; top:0; left:0; width:100%; height:100%;
+  overflow: hidden; z-index: 0; background: var(--bg-very-dark);
+}
+.rain-char {
+  position: absolute; font-size: 1.8rem; font-weight: 300; 
+  color: rgba(255,255,255,0.1); transition: color 0.1s, transform 0.1s, text-shadow 0.1s; 
+  will-change: transform, top; transform: translate(-50%, -50%) scale(1);
+}
+.rain-char.active {
+  color: var(--primary); font-weight: bold; transform: translate(-50%, -50%) scale(1.25); 
+  text-shadow: 0 0 8px rgba(148,255,164,0.8), 0 0 12px rgba(148,255,164,0.4); 
+  z-index: 10; animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.hero-container {
+  position: relative;
+  z-index: 20;
+  max-width: 900px;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: rgba(20, 40, 25, 0.9);
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  border-radius: var(--border-radius-pill);
+  font-family: 'Inter', sans-serif; 
+  font-size: 0.85rem; 
+  color: var(--text-light); 
+  margin-bottom: 2rem; 
+  font-weight: 500;
+  border: 1px solid rgba(148, 255, 164, 0.4);
+}
+.hero-eyebrow-icon {
+  background: var(--primary); width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; color: var(--text-dark);
+}
+
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem); 
+  font-weight: 700; 
+  letter-spacing: -1px; 
+  margin: 0 0 1.5rem; 
+  color: var(--text-light);
+  min-height: auto; 
+  display: block;
+  text-align: center;
+}
+.dud { color: var(--primary); opacity: 0.7; }
+
+.hero p.subheadline {
+  font-size: 1.15rem; 
+  color: rgba(255,255,255,0.8); 
+  margin: 0 0 2.5rem; 
+  font-weight: 400; 
+  line-height: 1.6;
+  max-width: 800px;
+}
+.hero-cta-wrapper { display: flex; flex-direction: column; align-items: center; }
+.microcopy { margin-top: 1rem; font-size: 0.85rem; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 0.5rem; justify-content: center; }
+
+
+/* ================= 2. SEÇÃO DA DOR (PERSONAL LANDING ADAPTADA) ================= */
+.personal-pain-section {
+  position: relative;
+  background: var(--bg-very-dark);
+  padding: 8rem 0;
+  overflow: hidden;
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+}
+.blob-bg {
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 60%);
+  opacity: 0.15;
+  filter: blur(80px);
+  border-radius: 50%;
+  animation: pulse-slow 8s infinite alternate;
+  z-index: 0;
+}
+@keyframes pulse-slow {
+  0% { transform: scale(1); opacity: 0.1; }
+  100% { transform: scale(1.1); opacity: 0.2; }
+}
+.personal-pain-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.personal-avatar-wrapper {
+  position: relative;
+  margin: 0 auto;
+  width: 120px;
+  height: 120px;
+}
+.personal-avatar-glow {
+  position: absolute;
+  inset: -10px;
+  background: radial-gradient(circle, var(--primary), transparent 70%);
+  opacity: 0.4;
+  filter: blur(20px);
+  border-radius: 50%;
+  animation: pulse-slow 4s infinite alternate;
+}
+.personal-avatar {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid var(--bg-very-dark);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  object-fit: cover;
+  z-index: 10;
+}
+.personal-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  text-align: center;
+  color: var(--text-light);
+  letter-spacing: -1px;
+}
+.personal-subhead {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  line-height: 1.6;
+}
+.personal-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+.personal-p-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: left;
+}
+.personal-p-card p {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+}
+.personal-highlight-card {
+  background: rgba(148, 255, 164, 0.05);
+  border: 1px solid rgba(148, 255, 164, 0.3);
+  padding: 2.5rem;
+  border-radius: 24px;
+  text-align: center;
+  width: 100%;
+}
+.personal-highlight-card p {
+  font-size: 1.15rem;
+  color: var(--primary);
+  font-weight: 600;
+  line-height: 1.5;
+}
+@media(max-width: 768px) {
+  .personal-card-grid { grid-template-columns: 1fr; }
+}
+/* ================= 3. A SOLUÇÃO (GLOWING GREEN CARD) ================= */
+.solution-section { padding: 8rem 0; background: var(--bg-very-dark); position: relative;}
+.ia-block {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+}
+.ia-card {
+  background: linear-gradient(135deg, #11b85d 0%, #b9fbc0 100%);
+  padding: 3rem 5rem;
+  border-radius: 24px;
+  display: inline-flex; align-items: center; gap: 2rem;
+  box-shadow: 0 20px 60px rgba(17,184,93,0.3);
+  margin-bottom: 4rem;
+}
+.ia-letters { font-family: 'Space Grotesk', sans-serif; font-size: 6rem; font-weight: 800; color: var(--bg-very-dark); line-height: 1; letter-spacing: -4px;}
+.ia-play { width: 60px; height: 60px; background: var(--bg-white); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary);}
+.ia-text { text-align: left; color: var(--bg-very-dark); }
+.ia-text p { font-weight: 700; font-size: 1.1rem; margin:0; line-height: 1.3;}
+
+.solution-content { max-width: 800px; margin: 0 auto;}
+.solution-content h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; text-align: center;}
+.solution-content p { font-size: 1.15rem; color: rgba(255,255,255,0.6); text-align: center;}
+
+/* ================= 4. TANGIBILIDADE (BLACK GRID CARDS) ================= */
+.tangibility { padding: 6rem 0; background: var(--bg-light-green); }
+.tangibility h2 { text-align: center; font-size: 2.2rem; color: var(--bg-very-dark); margin-bottom: 4rem; }
+.black-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+.b-card {
+  background: var(--bg-very-dark); padding: 3rem 2rem; border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s;
+}
+.b-card:hover { transform: translateY(-5px); border-color: rgba(148,255,164,0.3); }
+.b-card-icon { width: 44px; height: 44px; background: rgba(148,255,164,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--primary); }
+.b-card h3 { font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-light); }
+.b-card p { font-size: 0.95rem; color: rgba(255,255,255,0.6); }
+
+/* ================= 5. COMO FUNCIONA (PIPELINE) ================= */
+.how-it-works { padding: 8rem 0; background: var(--bg-very-dark); color: var(--text-light); border-top: 1px solid rgba(255,255,255,0.05);}
+.how-it-works h2 { text-align: center; font-size: 2.5rem; margin-bottom: 5rem; }
+.pipeline-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; position: relative; }
+.pipeline-item { text-align: center; position: relative; z-index: 2; }
+.pipeline-icon { width: 80px; height: 80px; background: var(--bg-dark); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--primary); border: 2px solid rgba(148,255,164,0.2); }
+.pipeline-item h3 { font-size: 1.3rem; margin-bottom: 0.8rem; }
+.pipeline-item p { font-size: 0.95rem; color: rgba(255,255,255,0.6); }
+.pipeline-line { position: absolute; top: 40px; left: 15%; right: 15%; height: 2px; background: dashed 2px rgba(148,255,164,0.2); z-index: 1;}
+
+/* ================= 5.5 TESTIMONIALS (MARQUEES) ================= */
+.testimonials-section {
+  padding: 8rem 0;
+  background: var(--bg-very-dark);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.testimonials-container {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.testimonials-header { text-align: center; margin-bottom: 4rem; z-index: 10; position:relative;}
+.test-eyebrow {
+  display: inline-block; padding: 0.4rem 1.2rem; border-radius: 8px;
+  border: 1px solid rgba(148,255,164,0.2); color: var(--primary); font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem;
+}
+.testimonials-header h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; color: var(--text-light);}
+.testimonials-header p { color: rgba(255,255,255,0.6); font-size: 1.1rem; }
+
+.test-wrapper {
+  display: flex; justify-content: center; gap: 1.5rem; width: 100%;
+  max-height: 740px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+}
+.test-col { width: 100%; max-width: 340px; }
+.test-track {
+  display: flex; flex-direction: column; gap: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.track-1 { animation: scroll-test 25s linear infinite; }
+.track-2 { animation: scroll-test 30s linear infinite; }
+.track-3 { animation: scroll-test 28s linear infinite; }
+
+@keyframes scroll-test {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.test-card {
+  padding: 2.5rem 2rem; border-radius: 24px; background: var(--bg-dark);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 30px rgba(148,255,164,0.02);
+  color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.5;
+  display: flex; flex-direction: column;
+}
+.test-user {
+  display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem;
+}
+.test-user img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover;}
+.test-user h4 { color: var(--text-light); font-size: 1rem; margin:0; font-family: 'Inter', sans-serif;}
+.test-user span { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+
+/* ================= 6. A OFERTA IRRESISTÍVEL (PREMIUM PRICING) ================= */
+.offer-section { 
+  position: relative;
+  padding: 8rem 0; 
+  background: var(--bg-very-dark); 
+  color: var(--text-light); 
+  text-align: center;
+  overflow: hidden;
+}
+/* Grid e Glow (Sparkles effect simulation) */
+.pricing-bg-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 70px 80px;
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 0%, transparent 80%);
+  z-index: 0;
+}
+.pricing-bg-glow {
+  position: absolute; top: 0; left: 15%; right: 15%; height: 100%;
+  background: radial-gradient(circle at center, var(--primary) 0%, transparent 60%);
+  opacity: 0.1; mix-blend-mode: color-dodge; z-index: 0;
+}
+.offer-section .container { position: relative; z-index: 10; }
+
+.vertical-reveal {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
+  /* Fallback animation */
+  animation: slideUp 1s ease-out forwards;
+}
+.offer-section > .container > p {
+  font-size: 1.15rem; color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto 4rem;
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(30px); opacity: 0; filter: blur(5px); }
+  100% { transform: translateY(0); opacity: 1; filter: blur(0); }
+}
+
+.premium-pricing-card {
+  max-width: 480px; margin: 0 auto;
+  background: linear-gradient(160deg, #101612 0%, #070D09 100%);
+  border: 1px solid rgba(148,255,164,0.2);
+  border-radius: 24px; padding: 3rem;
+  box-shadow: 0 -10px 150px rgba(17,184,93,0.15), inset 0 1px 0 rgba(148,255,164,0.3);
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+.premium-pricing-card:hover { transform: translateY(-5px); box-shadow: 0 -20px 180px rgba(17,184,93,0.25), inset 0 1px 0 rgba(148,255,164,0.5); }
+
+.premium-pricing-card h3 { font-size: 2.2rem; color: var(--text-light); margin: 0 0 0.5rem; line-height: 1.1; font-family: 'Space Grotesk', sans-serif;}
+.price-display { margin: 1.5rem 0; display:flex; align-items: baseline; gap:0.4rem;}
+.price-display .currency { font-size: 1.5rem; font-weight: 500; color: rgba(255,255,255,0.5);}
+.price-display .amount { font-size: 5rem; font-weight: 800; color: var(--text-light); letter-spacing: -3px; line-height: 1;}
+.price-display .period { font-size: 1rem; color: rgba(255,255,255,0.4); font-weight: 400;}
+
+.premium-pricing-card .description { color: rgba(255,255,255,0.6); font-size: 1rem; margin-bottom: 2rem;}
+
+.btn-premium {
+  display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+  width: 100%; padding: 1.2rem; font-size: 1.2rem; border-radius: 14px;
+  background: linear-gradient(to top, #096B34, var(--primary));
+  color: var(--bg-very-dark); font-weight: 800; border: 1px solid rgba(148,255,164,0.8);
+  box-shadow: 0 5px 25px rgba(17,184,93,0.3);
+  margin-bottom: 2.5rem; cursor: pointer; text-decoration: none; transition: 0.2s ease;
+}
+.btn-premium:hover { filter: brightness(1.1); transform: scale(1.02); }
+
+.features-list { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; list-style: none;}
+.features-list-title { font-weight: 600; font-size: 1.05rem; margin-bottom: 1.5rem; color: var(--text-light);}
+.features-list li { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: rgba(255,255,255,0.8); font-size: 0.95rem;}
+.dot-icon { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 10px var(--primary); flex-shrink: 0;}
+
+/* ================= 7. GARANTIA ================= */
+.guarantee { padding: 5rem 0; background: var(--primary); color: var(--bg-very-dark); text-align: center; }
+.guarantee-box { max-width: 800px; margin: 0 auto; }
+.guarantee h2 { color: var(--bg-very-dark); font-size: 2.5rem; margin-bottom: 1.5rem; }
+.guarantee p { font-size: 1.1rem; font-weight: 600; }
+
+/* ================= 8. FAQ ================= */
+.faq-section { padding: 6rem 0; background: var(--bg-white); }
+.faq-container { max-width: 800px; margin: 0 auto; }
+.faq-section h2 { text-align: center; font-size: 2.5rem; margin-bottom: 4rem; color: var(--bg-very-dark);}
+.faq-item { background: var(--bg-white); border-bottom: 1px solid #E5E7EB; margin-bottom: 1rem; padding: 1.5rem 0; }
+.faq-item h3 { font-size: 1.15rem; margin-bottom: 0.8rem; color: var(--bg-very-dark); display:flex; align-items:flex-start; gap: 1rem;}
+.faq-item h3::before { content: 'Q.'; color: #11b85d; font-weight:800; font-family: 'Space Grotesk', sans-serif;}
+.faq-item p { color: var(--text-base); margin-left: 2rem; font-size: 0.95rem;}
+
+.cta-footer { padding: 4rem 0; background: var(--bg-very-dark); text-align: center; }
+
+/* RESPONSIVO */
+@media(max-width: 992px) {
+  .dark-panel-grid { grid-template-columns: 1fr; }
+  .pipeline-grid { grid-template-columns: 1fr; }
+  .pipeline-line { display: none; }
+  .hide-tablet { display: none; }
+}
+@media(max-width: 768px) {
+  .header-flex { justify-content: center; }
+  .hero { min-height: 100vh; height: auto; text-align: center; padding-top: 7rem; align-items: flex-start; justify-content: flex-start; }
+  .personal-pain-section, .solution-section, .tangibility, .how-it-works, .testimonials-section, .offer-section, .faq-section { padding: 4rem 0; }
+  
+  .dark-panel { padding: 2rem; }
+  .ia-card { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; }
+  .ia-letters { font-size: 3.5rem; letter-spacing: -2px; }
+  .solution-content h2 { font-size: 1.8rem; }
+  
+  .premium-pricing-card { padding: 2rem 1.5rem; margin: 0 1rem; }
+  .price-display { flex-direction: column; align-items: center; }
+  .price-display .amount { font-size: 3.5rem; }
+  
+  .btn { width: 100%; justify-content: center; padding: 1.2rem !important; font-size: 1rem !important; }
+  .hero-cta-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  
+  .test-col:not(:first-child) { display: none; } /* Deixa apenas 1 coluna de depoimentos no mobile */
+  .test-wrapper { max-height: 500px; gap: 0; }
+  
+  .hide-mobile { display: none; }
+}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '507454401018741');
+fbq('track', 'PageView');
+
+setTimeout(function() {
+  fbq('track', 'ViewContent', {
+    content_name: 'Raio-X Financeiro',
+    currency: 'BRL',
+    value: 9.90
+  });
+}, 3000);
+
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=507454401018741&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<header>
+  <div class="container header-flex">
+    <div class="logo">guardião<span>_</span></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. HERO SECTION (MODERN ANIMATED - RAINING LETTERS) -->
+  <section class="hero">
+    <div id="raining-letters-bg" class="raining-letters-bg"></div>
+
+    <div class="container hero-container">
+      <div id="hero-eyebrow" class="hero-eyebrow">
+        <div class="hero-eyebrow-icon">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        Descubra como colocar a sua rotina financeira "no azul", mesmo se você já tentou planilhas no passado.
+      </div>
+      
+      <h1 id="hero-headline" style="text-transform:none;">R$3.000 por mês.<br>30 dias de trabalho duro.<br>E no dia 20 você já está contando as moedas.</h1>
+      
+      <p id="hero-subheadline" class="subheadline"><strong>Não é falta de esforço. É que ninguém te mostrou onde o dinheiro some antes do dia 20.</strong><br><br>Um método baseado em 10 perguntas rápidas que diagnostica para onde o seu dinheiro está vazando e te entrega o Plano de 21 Dias exato para você voltar a ter paz na conta bancária.</p>
+      
+      <div class="hero-cta-wrapper">
+        <button id="cta-hero" onclick="dispararCheckout()" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.4rem 3rem; font-family: 'Inter', sans-serif; cursor: pointer;">
+          QUERO MEU DIAGNÓSTICO AGORA — R$9,90
+          <div class="btn-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+        </button>
+        <div class="microcopy" style="color: var(--primary); font-weight: 700; font-size: 1.05rem; margin-top: 1.5rem; justify-content: center; width: 100%; text-shadow: 0 0 10px rgba(148,255,164,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+           ACESSO IMEDIATO POR R$ 9,90 — ÚNICO
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. SEÇÃO DA DOR (PERSONAL LANDING ADAPTADA) -->
+  <section class="personal-pain-section">
+    <div class="blob-bg"></div>
+    <div class="container personal-pain-container">
+      
+      <div class="personal-avatar-wrapper">
+        <div class="personal-avatar-glow"></div>
+        <img class="personal-avatar" src="https://api.dicebear.com/8.x/lorelei-neutral/svg?seed=John" style="background: var(--bg-light-green);" alt="Avatar">
+      </div>
+
+      <h2 class="personal-headline">Sabemos que a dor real não é a falta de dinheiro... é a comparação.</h2>
+      
+      <p class="personal-subhead">Você provavelmente bate o olho na conta no dia 5. Paga as primeiras contas. O mês avança. A ansiedade vai batendo na sua porta.</p>
+      
+      <div class="personal-card-grid">
+        <div class="personal-p-card">
+          <p>A conta de luz, o plano de celular online, as compras da semana. Do nada, o seu dinheiro some e você se pega olhando as faturas mais uma vez sentindo aquele aperto no peito, encolhendo os ombros. Como se houvesse um vazamento oculto que você nunca consegue fechar.</p>
+        </div>
+        <div class="personal-p-card">
+          <p>E a pior parte? Você olha para pessoas que ganham o mesmo que você e elas parecem estar vivendo bem. Elas viajam, saem aos finais de semana e não entram em desespero quando a geladeira esvazia.</p>
+        </div>
+      </div>
+      
+      <div class="personal-highlight-card">
+        <p>Você não falhou. Você só estava usando as ferramentas erradas. Planilhas frias não resolvem o comportamento emocional humano.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. A SOLUÇÃO (IA CARD) -->
+  <section class="solution-section">
+    <div class="container">
+      <div class="ia-block">
+        <div class="ia-card">
+          <div class="ia-letters">IA</div>
+          <div class="ia-play">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </div>
+          <div class="ia-text">
+            <p>Conheça um sistema de<br>diagnóstico financeiro <br>baseado em inteligência.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="solution-content">
+        <h2>Seus dias lutando contra planilhas confusas acabaram.</h2>
+        <p>Você não precisa ler manuais complexos nem se transformar num economista obcecado por números. Toda jornada começa com clareza. Tudo o que você precisa fazer é olhar os fatos reais. Sem achismos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TANGIBILIDADE (BLACK CARDS GRID) -->
+  <section class="tangibility">
+    <div class="container">
+      <h2>O que você recebe assim que finalizar as perguntas:</h2>
+      
+      <div class="black-cards-grid">
+        <div class="b-card">
+          <div class="b-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+          <h3>Onde seu dinheiro some todo mês</h3>
+          <p>Descubra a "Falha de Vazamento". Um diagnóstico claro que mostrará o padrão que está sugando seus R$ 3.000 antes do mês acabar.</p>
+        </div>
+
+        <div class="b-card">
+          <div class="b-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div>
+          <h3>O roteiro exato para parar no vermelho</h3>
+          <p>Receba um roteiro passo a passo do que fazer na sua 1ª, 2ª e 3ª semana para estancar a hemorragia e fechar positivo.</p>
+        </div>
+
+        <div class="b-card">
+          <div class="b-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+          <h3>Você entende tudo em menos de 3 min</h3>
+          <p>Sem jargões. Apenas um raio-x legível que tira o peso das costas e mostra que virar o jogo é muito mais fácil.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. COMO FUNCIONA (PIPELINE) -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2>O caminho mais rápido para voltar a dormir em paz</h2>
+      
+      <div class="pipeline-grid">
+        <div class="pipeline-line"></div>
+        <div class="pipeline-item">
+          <div class="pipeline-icon">01</div>
+          <h3>Raio-X Comportamental</h3>
+          <p>Responda a 10 perguntas de múltipla escolha. Leva menos de 3 minutos. Foco real.</p>
+        </div>
+        <div class="pipeline-item">
+          <div class="pipeline-icon" style="background:var(--primary); color:var(--text-dark); border-color:var(--primary);">02</div>
+          <h3>Computação Silenciosa</h3>
+          <p>Nosso sistema cruza dados e identifica os padrões de sabotagem ocultos.</p>
+        </div>
+        <div class="pipeline-item">
+          <div class="pipeline-icon">03</div>
+          <h3>Receba o Plano</h3>
+          <p>Visualize seu resultado imediato e seu roteiro. Comece aplicar a bula hoje mesmo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5.5 TESTIMONIALS SOCIAL PROOF -->
+  <section class="testimonials-section">
+    <div class="container testimonials-container">
+      
+      <div class="testimonials-header">
+        <div class="test-eyebrow">Depoimentos Reais</div>
+        <h2>O que dizem sobre o método</h2>
+        <p>Veja o que acontece quando alguém descobre onde o dinheiro estava indo:</p>
+      </div>
+
+      <div class="test-wrapper">
+        <!-- COLUNA 1 -->
+        <div class="test-col">
+          <div class="test-track track-1">
+            <!-- Items (Original) -->
+            <div class="test-card">
+              <div>"Este Raio-X foi um divisor de águas! Consegui achar R$ 600 na minha rotina que estavam evaporando e eu não fazia ideia."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Mariana P.">
+                <div><h4>Mariana P.</h4><span>Assistente Administrativo</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"Simples, rápido e direto ao ponto. O Plano de 21 Dias já na primeira semana me colocou de volta no controle. Superou expectativas."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Carlos A.">
+                <div><h4>Carlos A.</h4><span>Analista de TI</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"A Inteligência por trás dessas 10 perguntas é assustadora. Parecia que o aplicativo conhecia a minha vida melhor do que eu."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Felipe T.">
+                <div><h4>Felipe T.</h4><span>Vendedor</span></div>
+              </div>
+            </div>
+            <!-- Items (Duplicated for Infinite Scroll) -->
+            <div class="test-card">
+              <div>"Este Raio-X foi um divisor de águas! Consegui achar R$ 600 na minha rotina que estavam evaporando e eu não fazia ideia."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Mariana P.">
+                <div><h4>Mariana P.</h4><span>Assistente Administrativo</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"Simples, rápido e direto ao ponto. O Plano de 21 Dias já na primeira semana me colocou de volta no controle. Superou expectativas."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Carlos A.">
+                <div><h4>Carlos A.</h4><span>Analista de TI</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"A Inteligência por trás dessas 10 perguntas é assustadora. Parecia que o aplicativo conhecia a minha vida melhor do que eu."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Felipe T.">
+                <div><h4>Felipe T.</h4><span>Vendedor</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 2 -->
+        <div class="test-col hide-mobile">
+          <div class="test-track track-2">
+            <!-- Items (Original) -->
+            <div class="test-card">
+              <div>"Eu odiava planilhas com força. O fato de ter um diagnóstico automático mudou o meu olhar pros meus próprios gastos."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/men/4.jpg" alt="Ana V.">
+                <div><h4>Ana V.</h4><span>Gerente Comercial</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"Sem jargões ou termos de economia que eu não entendo. Apenas os passos práticos fundamentais que eu precisava trilhar."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/women/5.jpg" alt="Renato D.">
+                <div><h4>Renato D.</h4><span>Designer Graphic</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"A velocidade do relatório é incrivel! Em dois minutos via WhatsApp recebi o diagnóstico de que o Ifood me drenava o mês inteiro."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/women/6.jpg" alt="Thiago B.">
+                <div><h4>Thiago B.</h4><span>Desenvolvedor Frontend</span></div>
+              </div>
+            </div>
+            <!-- Items (Duplicated) -->
+            <div class="test-card">
+              <div>"Eu odiava planilhas com força. O fato de ter um diagnóstico automático mudou o meu olhar pros meus próprios gastos."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/men/4.jpg" alt="Ana V.">
+                <div><h4>Ana V.</h4><span>Gerente Comercial</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"Sem jargões ou termos de economia que eu não entendo. Apenas os passos práticos fundamentais que eu precisava trilhar."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/women/5.jpg" alt="Renato D.">
+                <div><h4>Renato D.</h4><span>Designer Graphic</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"A velocidade do relatório é incrivel! Em dois minutos via WhatsApp recebi o diagnóstico de que o Ifood me drenava o mês inteiro."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/women/6.jpg" alt="Thiago B.">
+                <div><h4>Thiago B.</h4><span>Desenvolvedor Frontend</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 3 -->
+        <div class="test-col hide-tablet">
+          <div class="test-track track-3">
+            <!-- Items (Original) -->
+            <div class="test-card">
+              <div>"Um pequeno sistema que resolveu meses de ansiedade quando percebi que eu ganhava o suficiente sim, o problema era a gestão."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/men/7.jpg" alt="Julia S.">
+                <div><h4>Julia S.</h4><span>Marketing</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"Recomendo a qualquer um da classe CLT média. Pelo preço de um salgado ele literalmente salva seu mês da catástrofe."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/women/8.jpg" alt="Priscila L.">
+                <div><h4>Priscila L.</h4><span>Analista de RH</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"A melhor compra que eu poderia ter feito num dia 5 de mês. Parei a sangria. Recomendo usar todo início de mês com as faturas."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/men/9.jpg" alt="Bruno R.">
+                <div><h4>Bruno R.</h4><span>Engenheiro</span></div>
+              </div>
+            </div>
+            <!-- Items (Duplicated) -->
+            <div class="test-card">
+              <div>"Um pequeno sistema que resolveu meses de ansiedade quando percebi que eu ganhava o suficiente sim, o problema era a gestão."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/men/7.jpg" alt="Julia S.">
+                <div><h4>Julia S.</h4><span>Marketing</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"Recomendo a qualquer um da classe CLT média. Pelo preço de um salgado ele literalmente salva seu mês da catástrofe."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/women/8.jpg" alt="Priscila L.">
+                <div><h4>Priscila L.</h4><span>Analista de RH</span></div>
+              </div>
+            </div>
+            <div class="test-card">
+              <div>"A melhor compra que eu poderia ter feito num dia 5 de mês. Parei a sangria. Recomendo usar todo início de mês com as faturas."</div>
+              <div class="test-user">
+                <img src="https://randomuser.me/api/portraits/men/9.jpg" alt="Bruno R.">
+                <div><h4>Bruno R.</h4><span>Engenheiro</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. A OFERTA IRRESISTÍVEL (PREMIUM PRICING SECTION) -->
+  <section class="offer-section" id="checkout">
+    <div class="pricing-bg-grid"></div>
+    <div class="pricing-bg-glow"></div>
+
+    <div class="container">
+      <h2 id="offer-headline" class="vertical-reveal" style="font-family:'Space Grotesk', sans-serif; font-size: clamp(2.5rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.2; color: var(--text-light);">
+        Comece agora. Resultado em 7 minutos.
+      </h2>
+      <p style="font-size: 1.1rem; color: rgba(255,255,255,0.7); max-width: 750px; margin: 0 auto 4rem; line-height: 1.6;">
+        O que acontece se você fechar essa página hoje sem a solução? Você fecha os olhos. O dia 15 chega. O dinheiro acaba de novo. Você vai perder pelo menos cinco a dez vezes mais pagando juros no rotativo, e aquele sentimento familiar de sufoco voltará com força total. <strong>Custa mais caro não fazer nada.</strong>
+      </p>
+      
+      <div class="premium-pricing-card">
+        <h3>O Diagnóstico<br>+ Plano de 21 Dias</h3>
+        <p class="description">Descubra para onde o seu dinheiro está vazando e estanque a sangria financeira hoje.</p>
+        
+        <div class="price-display">
+          <span class="currency">R$</span>
+          <span class="amount">9,90</span>
+          <span class="period">/ único</span>
+        </div>
+        
+        <button onclick="dispararCheckout()" class="btn-premium" style="font-family: 'Inter', sans-serif; cursor: pointer;">
+          QUERO MEU DIAGNÓSTICO AGORA — R$9,90
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+
+        <div class="features-list">
+          <div class="features-list-title">O que está incluído:</div>
+          <ul>
+            <li><div class="dot-icon"></div> Raio-X de Comportamento Financeiro</li>
+            <li><div class="dot-icon"></div> Identificação de Vazamentos</li>
+            <li><div class="dot-icon"></div> Plano de Ação Personalizado (21 Dias)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PRICE ANCHOR -->
+  <section class="price-anchor" style="padding: 2rem 0; background: var(--bg-very-dark); text-align: center; color: rgba(255,255,255,0.5); font-size: 0.95rem;">
+    <div class="container price-anchor-box" style="max-width: 600px; margin: 0 auto;">
+      <p>R$9,90. Menos que um café por semana. Acesso imediato assim que o pagamento for confirmado.</p>
+    </div>
+  </section>
+
+  <!-- 8. FAQ -->
+  <section class="faq-section">
+    <div class="container faq-container">
+      <h2>Perguntas Frequentes</h2>
+
+      <div class="faq-item">
+        <h3>É um aplicativo ou eu preciso baixar algo?</h3>
+        <p>Não precisa baixar nenhum app pesado. O Raio-X vai acontecer ali mesmo, na tela, de forma instintiva e rápida.</p>
+      </div>
+      <div class="faq-item">
+        <h3>O que é esse "Guardião" pelo WhatsApp?</h3>
+        <p>É a nossa IA premium que envia alertas dinâmicos no WhatsApp. Você terá a chance de destravar essa funcionalidade extra logo após o seu Raio-X.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Segurança de Dados? Vocês lêem minha conta?</h3>
+        <p>Sua privacidade é nossa lei. Nós NÃO pedimos senha de banco. A análise é via respostas e inputs comportamentais.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-footer">
+    <div class="container">
+      <button onclick="dispararCheckout()" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.4rem 3rem; font-family: 'Inter', sans-serif; cursor: pointer;">
+        QUERO MEU DIAGNÓSTICO AGORA — R$9,90
+        <div class="btn-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </div>
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<footer style="text-align: center; padding: 2rem 0; background: var(--bg-very-dark); color: rgba(255,255,255,0.4); font-size: 0.9rem;">
+  <p>© 2026 Guardião. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+const BACKEND_URL = 'https://guardiao-webhook-production.up.railway.app';
+
+async function dispararCheckout() {
+  // Pixel event
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'InitiateCheckout', {
+      content_name: 'Raio-X Financeiro',
+      currency: 'BRL',
+      value: 9.90
+    });
+  }
+
+  // Feedback visual nos botões
+  const buttons = document.querySelectorAll('[onclick="dispararCheckout()"]');
+  buttons.forEach(btn => {
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    btn.style.cursor = 'wait';
+    btn.innerHTML = '⏳ Aguarde...';
+  });
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/checkout/isca`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!res.ok) throw new Error(`Erro ${res.status}`);
+
+    const { url } = await res.json();
+    window.location.href = url;
+
+  } catch (err) {
+    console.error('Erro ao criar checkout:', err);
+    // Fallback: redireciona para o link fixo existente
+    window.location.href = 'https://www.asaas.com/c/h6kyfr7blh2tijvt';
+  }
+}
+</script>
+
+<script>
+// ============================================================
+// AGENTIC ARBITRAGE LOOP — Guardião v1
+// ============================================================
+
+const AB_VARIANTS = {
+  controle: {
+    'hero-headline': 'R$3.000 por mês.<br>30 dias de trabalho duro.<br>E no dia 20 você já está contando as moedas.',
+    'hero-subheadline': '<strong>Não é falta de esforço. É que ninguém te mostrou onde o dinheiro some antes do dia 20.</strong><br><br>Um método baseado em 10 perguntas rápidas que diagnostica para onde o seu dinheiro está vazando e te entrega o Plano de 21 Dias exato para você voltar a ter paz na conta bancária.',
+    'cta-hero': 'QUERO MEU DIAGNÓSTICO AGORA — R$9,90',
+    'offer-headline': 'Comece agora. Resultado em 7 minutos.'
+  },
+  v2: {
+    'hero-headline': 'Você ganha R$3.000.<br>Trabalha o mês inteiro.<br>E some antes do dia 20.',
+    'hero-subheadline': '<strong>Não é fraqueza. É que o seu dinheiro tem um vazamento oculto que você nunca conseguiu localizar.</strong><br><br>10 perguntas. 3 minutos. Um diagnóstico que mostra exatamente onde ele está escapando — e o roteiro para fechar esse buraco hoje.',
+    'cta-hero': 'QUERO VER ONDE MEU DINHEIRO SOME — R$9,90',
+    'offer-headline': 'Descubra o vazamento. Estanque agora.'
+  },
+  v3: {
+    'hero-headline': 'Por que o seu dinheiro acaba antes do mês?<br>A resposta está a 10 perguntas de distância.',
+    'hero-subheadline': '<strong>Não é sobre ganhar mais. É sobre parar de perder pelos lugares errados.</strong><br><br>Um diagnóstico financeiro baseado em IA que identifica o padrão oculto que drena seus recursos — e entrega o plano exato para fechar o mês no positivo.',
+    'cta-hero': 'DESCOBRIR MEU VAZAMENTO AGORA — R$9,90',
+    'offer-headline': 'Seu diagnóstico financeiro em 7 minutos.'
+  }
+};
+
+// Distribuição: 50% controle, 25% v2, 25% v3
+function sortearVariante() {
+  const salva = sessionStorage.getItem('guardiao_variante');
+  if (salva) return salva;
+  const n = Math.random();
+  const variante = n < 0.5 ? 'controle' : n < 0.75 ? 'v2' : 'v3';
+  sessionStorage.setItem('guardiao_variante', variante);
+  return variante;
+}
+
+function aplicarVariante(variante) {
+  const dados = AB_VARIANTS[variante];
+  if (!dados) return;
+
+  // Aplica em cada elemento testado
+  Object.entries(dados).forEach(([id, conteudo]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    // CTA: só o texto, preservando o ícone SVG
+    if (id.startsWith('cta-')) {
+      const svg = el.querySelector('svg, .btn-icon');
+      el.innerHTML = conteudo;
+      if (svg) el.appendChild(svg);
+    } else {
+      el.innerHTML = conteudo;
+    }
+  });
+
+  // Atualiza todos os outros botões de checkout com o mesmo CTA
+  document.querySelectorAll('.btn-premium').forEach(btn => {
+    const svg = btn.querySelector('svg');
+    btn.innerHTML = dados['cta-hero'];
+    if (svg) btn.appendChild(svg);
+  });
+}
+
+function registrarVariante(variante) {
+  // Meta Pixel — evento customizado por variante
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'ABVariante', {
+      variante: variante,
+      pagina: 'guardiao-lp'
+    });
+  }
+  // Console log para debug no Claude Code
+  console.log('[ARBITRAGE LOOP] Variante ativa:', variante);
+}
+
+// Rastreia clique no CTA com a variante
+const _dispararCheckoutOriginal = window.dispararCheckout;
+window.dispararCheckout = function() {
+  const variante = sessionStorage.getItem('guardiao_variante') || 'controle';
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'CTAClick', {
+      variante: variante,
+      pagina: 'guardiao-lp'
+    });
+  }
+  console.log('[ARBITRAGE LOOP] Conversão disparada — variante:', variante);
+  _dispararCheckoutOriginal();
+};
+
+// Inicializa o loop
+(function init() {
+  const variante = sortearVariante();
+  aplicarVariante(variante);
+  registrarVariante(variante);
+})();
+</script>
+</body>
+<script>
+// --- LOGIC FOR MODERN ANIMATED HERO SECTION (RAINING LETTERS ONLY) ---
+
+// 1. Raining Letters Background
+const allChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+const charCount = 200;
+const bg = document.getElementById('raining-letters-bg');
+const rainLetters = [];
+
+for(let i = 0; i < charCount; i++) {
+  const span = document.createElement('span');
+  span.className = 'rain-char';
+  const data = {
+    el: span,
+    char: allChars[Math.floor(Math.random() * allChars.length)],
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    speed: 0.1 + Math.random() * 0.3
+  };
+  span.innerText = data.char;
+  span.style.left = `${data.x}%`;
+  span.style.top = `${data.y}%`;
+  bg.appendChild(span);
+  rainLetters.push(data);
+}
+
+function updatePositions() {
+  for(let i=0; i<rainLetters.length; i++) {
+    const char = rainLetters[i];
+    char.y += char.speed;
+    if (char.y >= 100) {
+      char.y = -5;
+      char.x = Math.random() * 100;
+      char.char = allChars[Math.floor(Math.random() * allChars.length)];
+      char.el.innerText = char.char;
+      char.el.style.left = `${char.x}%`;
+    }
+    char.el.style.top = `${char.y}%`;
+  }
+  requestAnimationFrame(updatePositions);
+}
+requestAnimationFrame(updatePositions);
+
+setInterval(() => {
+  for(let i=0; i<rainLetters.length; i++) {
+    rainLetters[i].el.classList.remove('active');
+  }
+  const numActive = Math.floor(Math.random() * 3) + 3;
+  for (let i = 0; i < numActive; i++) {
+    const idx = Math.floor(Math.random() * charCount);
+    rainLetters[idx].el.classList.add('active');
+  }
+}, 50);
+
+</script>
+</html>
