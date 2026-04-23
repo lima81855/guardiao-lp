@@ -1004,22 +1004,12 @@ async function dispararCheckout() {
     btn.innerHTML = '⏳ Aguarde...';
   });
 
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/checkout/isca`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    });
-
-    if (!res.ok) throw new Error(`Erro ${res.status}`);
-
-    const { url } = await res.json();
-    window.location.href = url;
-
-  } catch (err) {
-    console.error('Erro ao criar checkout:', err);
-    // Fallback: redireciona para o link fixo existente
-    window.location.href = 'https://www.asaas.com/c/h6kyfr7blh2tijvt';
-  }
+    // O redirecionamento nativo captura e repassa os UTMs/Pixels para o Asaas registrar os eventos corretamente.
+    const urlAsaas = 'https://www.asaas.com/c/1wlovwpyd0rc1lr8';
+    
+    // Anexa as queries de rastreamento (UTMs e fbclid) da LP para a URL de pagamento
+    const params = window.location.search;
+    window.location.href = params ? urlAsaas + params : urlAsaas;
 }
 </script>
 
